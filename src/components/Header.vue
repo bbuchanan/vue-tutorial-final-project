@@ -12,11 +12,14 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li @click="endDay"><a href="#">End Day</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save &amp; Load<span class="caret"></span></a>
+          <li class="dropdown" :class="{open: isDropDownOpen }" @click="isDropDownOpen = !isDropDownOpen">
+            <a href="#" class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button" aria-haspopup="true"
+            aria-expanded="false">Save &amp; Load<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li @click="saveState"><a href="#">Save</a></li>
-                <li @click="restoreState"><a href="#">Load</a></li>
+                <li @click="saveState"><a href="#">Save Data</a></li>
+                <li @click="restoreState"><a href="#">Load Data</a></li>
               </ul>
           </li>
           &nbsp;
@@ -31,6 +34,11 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  data () {
+    return {
+      isDropDownOpen: false
+    }
+  },
   computed: {
     ...mapGetters({
       totalFunds: 'totalFunds'
@@ -38,13 +46,13 @@ export default {
   },
   methods: {
     endDay() {
-      this.$store.commit('endDay')
+      this.$store.dispatch('endDay')
     },
     saveState() {
-      this.$store.commit('saveState')
+      this.$store.dispatch('saveState')
     },
     restoreState() {
-      this.$store.commit('restoreState')
+      this.$store.dispatch('restoreState')
     }
   }
 }

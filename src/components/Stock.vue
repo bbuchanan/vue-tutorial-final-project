@@ -33,7 +33,7 @@ export default {
   methods: {
     buy() {
       this.stock.quantity = parseInt(this.quantity)
-      this.$store.commit('buy', this.stock)
+      this.$store.dispatch('buy', this.stock)
     }
   },
   props: ['stock']
